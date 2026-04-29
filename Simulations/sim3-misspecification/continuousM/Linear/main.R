@@ -82,14 +82,14 @@ if (ATT.arg){
 }else{
   
   # run TMLE
-  tmle_output_Y1 <- TMLE(a=1,data=data,treatment=treatment, mediators=eval(parse(text = mediators)), outcome=outcome, covariates=eval(parse(text = covariates)),
+  tmle_output_Y1 <- estfd(a=1,data=data,treatment=treatment, mediators=eval(parse(text = mediators)), outcome=outcome, covariates=eval(parse(text = covariates)),
                          onestep=T, mediator.method=mediator.method, superlearner=superlearner,crossfit=crossfit,K=K,
                          lib = eval(parse(text = lib)), n.iter=15000, eps=T, cvg.criteria=0.001)
 }
 
 
 print("Y1 done")
-tmle_output_Y0 <- TMLE(a=0,data=data,treatment=treatment, mediators=eval(parse(text = mediators)), outcome=outcome, covariates=eval(parse(text = covariates)),
+tmle_output_Y0 <- estfd(a=0,data=data,treatment=treatment, mediators=eval(parse(text = mediators)), outcome=outcome, covariates=eval(parse(text = covariates)),
                        onestep=T, mediator.method=mediator.method, superlearner=superlearner,crossfit=crossfit,K=K,
                        lib = eval(parse(text = lib)), n.iter=15000, eps=T, cvg.criteria=0.001,ATT=ATT.arg)
 

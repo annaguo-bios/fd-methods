@@ -83,12 +83,12 @@ if (ATT.arg){
   
 }else{
   
-  tmle_output_Y1.F <- TMLE(a=1,data=data,treatment=treatment, mediators=eval(parse(text = mediators)), outcome=outcome, covariates=eval(parse(text = covariates)),
+  tmle_output_Y1.F <- estfd(a=1,data=data,treatment=treatment, mediators=eval(parse(text = mediators)), outcome=outcome, covariates=eval(parse(text = covariates)),
                          mediator.method=mediator.method, superlearner=superlearner,crossfit=crossfit,K=K,
                          lib = eval(parse(text = lib)), n.iter=15000, eps=F, cvg.criteria=n^{-1/2},
                          linkA=linkA, estimator='tmle',boundedsubmodelY=F)
   
-  tmle_output_Y1.T <- TMLE(a=1,data=data,treatment=treatment, mediators=eval(parse(text = mediators)), outcome=outcome, covariates=eval(parse(text = covariates)),
+  tmle_output_Y1.T <- estfd(a=1,data=data,treatment=treatment, mediators=eval(parse(text = mediators)), outcome=outcome, covariates=eval(parse(text = covariates)),
                            mediator.method=mediator.method, superlearner=superlearner,crossfit=crossfit,K=K,
                            lib = eval(parse(text = lib)), n.iter=15000, eps=F, cvg.criteria=n^{-1/2},
                            linkA=linkA, estimator='tmle',boundedsubmodelY=T)
@@ -96,12 +96,12 @@ if (ATT.arg){
 
 
 print("Y1 done")
-tmle_output_Y0.F <- TMLE(a=0,data=data,treatment=treatment, mediators=eval(parse(text = mediators)), outcome=outcome, covariates=eval(parse(text = covariates)),
+tmle_output_Y0.F <- estfd(a=0,data=data,treatment=treatment, mediators=eval(parse(text = mediators)), outcome=outcome, covariates=eval(parse(text = covariates)),
                        mediator.method=mediator.method, superlearner=superlearner,crossfit=crossfit,K=K,
                        lib = eval(parse(text = lib)), n.iter=15000, eps=F, cvg.criteria=n^{-1/2},
                        linkA=linkA, ATT=ATT.arg, estimator='tmle',boundedsubmodelY=F)
 
-tmle_output_Y0.T <- TMLE(a=0,data=data,treatment=treatment, mediators=eval(parse(text = mediators)), outcome=outcome, covariates=eval(parse(text = covariates)),
+tmle_output_Y0.T <- estfd(a=0,data=data,treatment=treatment, mediators=eval(parse(text = mediators)), outcome=outcome, covariates=eval(parse(text = covariates)),
                          mediator.method=mediator.method, superlearner=superlearner,crossfit=crossfit,K=K,
                          lib = eval(parse(text = lib)), n.iter=15000, eps=F, cvg.criteria=n^{-1/2},
                          linkA=linkA, ATT=ATT.arg, estimator='tmle',boundedsubmodelY=T)

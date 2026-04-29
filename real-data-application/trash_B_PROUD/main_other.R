@@ -36,9 +36,7 @@ if(set==1){
 
 if(set==1){
   
-  # dt2 <- read.csv('/Users/apple/Library/CloudStorage/Dropbox/Front-door_Anna/data/B_PROUD/export_continuousM.csv') %>%
-  dt2 <- read.csv("export_continuousM.csv") %>%
-    mutate(mds_alarm_to_needle = if_else(mds_tpa == 0, 0.0, mds_alarm_to_needle*1))
+  dt2 <- read.csv("export_continuousM.csv") %>% mutate(mds_alarm_to_needle = if_else(mds_tpa == 0, 0, mds_alarm_to_needle))
   dt2.imputed <- mice(dt2, m = 10, method = 'pmm', seed = 7)
   dt2.imputed_data <- complete(dt2.imputed, 'long')
   
@@ -50,8 +48,7 @@ if(set==1){
   
 }else{
   
-  # dt <- read.csv('/Users/apple/Library/CloudStorage/Dropbox/Front-door_Anna/data/B_PROUD/export_mi.csv') %>%
-  dt <- read.csv("export_mi.csv") %>%
+  dt <- read.csv("export_mi.csv") %>% 
     select(-X) %>% 
     rename(A = STEMO, Y = mrs, M = mds_alarm_to_needle_cat, X1 = systolic_before, X2 = nihss_before) %>% 
     mutate(A = as.numeric(A), Y = as.numeric(Y)) %>% 
@@ -74,8 +71,6 @@ cat("Imputation", m, "\n")
 dt.analysis <- dt %>% filter(.imp==m)
 n <- nrow(dt.analysis)
 
-# ATE
-set.seed(7)
 est <- estfd(a=c(1,0),data=dt.analysis,treatment="A", mediators=m.var,
             outcome=y.var, covariates=c("X1","X2"), estimator=c('onestep','tmle'), mediator.method="bayes",superlearner = T, crossfit = T,K=5,
             lib = c("SL.glm", "SL.earth" ,"SL.ranger",  "SL.mean"), cvg.criteria = n^{-0.5})
@@ -94,25 +89,8 @@ set.piie.a0.TMLE.var_m <- mean({(dt.analysis[[y.var]] - mean(dt.analysis[[y.var]
 set.piie.a1.onestep.var_m <- mean({(dt.analysis[[y.var]] - mean(dt.analysis[[y.var]])) - est$Onestep.Y1$EIF}^2)/n
 set.piie.a0.onestep.var_m <- mean({(dt.analysis[[y.var]] - mean(dt.analysis[[y.var]])) - est$Onestep.Y0$EIF}^2)/n
 
-# ATT
-set.seed(7)
-ATTest <- estfd(a=0,data=dt.analysis,treatment="A", mediators=m.var,
-            outcome=y.var, covariates=c("X1","X2"), estimator=c('onestep','tmle'), mediator.method="bayes",superlearner = T, crossfit = T,K=5,
-            lib = c("SL.glm", "SL.earth" ,"SL.ranger",  "SL.mean"), cvg.criteria = n^{-0.5}, ATT=T)
-
-ATTest.a0 <- with(dt.analysis, mean((A==1)/mean(A==1)*(get(y.var))))
-ATTest.a0.EIF <- with(dt.analysis, (A==1)/mean(A==1)*(get(y.var)- ATTest.a0))
-set.TMLE.ATT.est_m <- ATTest.a0 - ATTest$TMLE$estimated_psi
-set.onestep.ATT.est_m <- ATTest.a0 - ATTest$Onestep$estimated_psi
-
-set.TMLE.ATT.var_m <- mean({ATTest.a0.EIF - ATTest$TMLE$EIF}^2)/n
-set.onestep.ATT.var_m <- mean({ATTest.a0.EIF - ATTest$Onestep$EIF}^2)/n
-
-
-
 save(list=c("est","set.TMLE.est_m", "set.onestep.est_m", "set.piie.a1.TMLE.est_m", "set.piie.a0.TMLE.est_m",
      "set.piie.a1.onestep.est_m", "set.piie.a0.onestep.est_m",
      "set.TMLE.var_m", "set.onestep.var_m", "set.piie.a1.TMLE.var_m", "set.piie.a0.TMLE.var_m",
-     "set.piie.a1.onestep.var_m", "set.piie.a0.onestep.var_m",
-     "ATTest","set.TMLE.ATT.est_m", "set.onestep.ATT.est_m", "set.TMLE.ATT.var_m", "set.onestep.ATT.var_m"),
+     "set.piie.a1.onestep.var_m", "set.piie.a0.onestep.var_m"),
      file=paste0("output/set_", set, "_m_", m, ".RData"))
