@@ -74,6 +74,20 @@ A summary of the functionality of commonly used files is provided below.
 
 ## Real data application
 
+```
+B_PROUD
+├── main_ordinal.R ← Produce estimates in Section 8
+├── main_other.R ← Produce estimates in Appendix Section S8.1
+├── organize_ordinal.R ← Organize estimates from main_ordinal.R
+├── organize_other.R ← Organize estimates from main_other.R and create Appendix Table S12
+├── write_job_ordinal.R
+└── write_job_other.R
+FSD
+├── analysis_fsd.R ← Produce estimates in Appendix Section S8.2 
+```
+
+
+
 Utilizing our front-door estimation framework, we analyzed the impact of Mobile Stroke Unit (MSU) dispatch on patients’ functional outcomes using data from the [Berlin prehospital stroke care trial (B_PROUD)](ClinicalTrials.gov), under identifier: NCT02869386.
 
 
