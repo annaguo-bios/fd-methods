@@ -1,2 +1,0 @@
-Rscript organize.R AIPW 200 1
-Rscript organize.R AIPW 200 0
