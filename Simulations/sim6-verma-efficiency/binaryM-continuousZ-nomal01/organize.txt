@@ -1,2 +1,0 @@
-Rscript organize.R output/ result.Rdata 5 1000 ../DGPs/6-truth-binaryM-continuousZ-normal01-pz.Rdata TMLE/
-Rscript organize.R output/ result.Rdata 5 1000 ../DGPs/6-truth-binaryM-continuousZ-normal01-pz.Rdata Onestep/

@@ -41,6 +41,21 @@ load("DGPs/6-truth-binaryM-continuousZ-normal10.1-pz.Rdata")
 load("binaryM-continuousZ-nomal10/Onestep/result.Rdata")
 p.normal10 <- plot.tmle(r'($\psi_1^{+}(\hat{Q};\ \tilde{p}(Z)); \ \tilde{p}(Z):\ N(10,1)$)',z="all.z")
 
+
+# ### N(10,1) ====
+# # the truth
+# load("DGPs/6-truth-binaryM-continuousZ-mix.Rdata")
+# 
+# load("binaryM-continuousZ-mix/Onestep/result.Rdata")
+# p.normal10 <- plot.tmle(r'($\psi_1^{+}(\hat{Q};\ \tilde{p}(Z)); \ \tilde{p}(Z):\ N(10,1)$)',z="all.z")
+
+### non verma estimator ====
+# the truth
+load("DGPs/6-truth-binaryM-continuousZ-nonverma.Rdata")
+
+load('binaryM-continuousZ-nonverma-estimator/Onestep/result.Rdata')
+p.nonverma <- plot.tmle(r'($\psi_1^{+}(\hat{Q})$)',z="nonverma")
+
 # 
 # p.tmle <- plot_grid(
 #   p.z0.tmle,p.z1.tmle,p.all.z.tmle,p.opt.tmle,
@@ -54,11 +69,12 @@ p.normal10 <- plot.tmle(r'($\psi_1^{+}(\hat{Q};\ \tilde{p}(Z)); \ \tilde{p}(Z):\
 # 
 # 
 p.final <- plot_grid(
-  p.pz,p.normal01,p.normal10,
+  p.pz,p.normal01,p.normal10,p.nonverma,
   align = "h",
-  ncol = 1
+  ncol = 2
 )
 
 
-ggsave("plot.pdf", plot = p.final, width = 8, height = 18, units = "in")
+ggsave("plot.pdf", plot = p.final, width = 16, height = 10, units = "in")
+ggsave("sim6-continuous.pdf", plot = p.final, width = 16, height = 10, units = "in")
 

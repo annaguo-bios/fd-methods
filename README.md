@@ -8,44 +8,43 @@ The correspondence between folders and figures/tables is summarized as follows:
 
 ```text
 ├── sim1-consistency
-│   ├── DGPs
-│   ├── binaryM		← Figure 3, 7
-│   ├── continuousM	← Figure 4, 8
-│   ├── multiM-d2	← Figure 5, 9
-│   └── multiM-d4	← Figure 6, 10
-├── sim2-weak-overlap	← Table 1, 8
-│   ├── DGPs
-│   ├── binaryM
-│   ├── continuousM
-│   └── multiM-d2
-├── sim3-misspecification	← Table 2, 9
-│   ├── DGPs
-│   ├── binaryM
-│   └── continuousM
+│   ├── DGPs
+│   ├── binaryM ← Figure S4, S8
+│   ├── continuousM ← Figure S5, S9 
+│   ├── multiM-d2 ← Figure S6, S10
+│   └── multiM-d4 ← Figure S7, S11
+├── sim2-weak-overlap ← Table 1, S4
+│   ├── DGPs
+│   ├── binaryM
+│   ├── continuousM
+│   └── multiM-d2
+├── sim3-misspecification ← Table 2, S5
+│   ├── DGPs
+│   ├── binaryM
+│   └── continuousM
 ├── sim4-crossfitting
-│   ├── DGPs
-│   ├── dense_forest	← Table 3, 10
-│   └── sparse_forest	← Table 11, 12
+│   ├── DGPs
+│   ├── dense_forest ← Table S6, S7
+│   └── sparse_forest ← Table S8, S9
 ├── sim5-sensitivity
-│   ├── binaryY-saturated		|
-│   ├── continuousY-binaryX		|	← Table 13
-│   ├── continuousY-continuousX		|
-│   ├── continuousY-continuousXM	← Table 4
-│   ├── continuousY-continuousX_complex		← Table 14
-│   
+│   ├── binaryY-saturated
+│   ├── continuousY-binaryX ← Table S10
+│   ├── continuousY-continuousX ← Table S10
+│   ├── continuousY-continuousXM ← Table S10, S11
+│   └── continuousY-continuousX_complex ← Table 3
 ├── sim6-verma-efficiency
-│   ├── DGPs
-│   ├── R
-│   ├── binaryM-binaryZ		← Figure 12
-│   ├── binaryM-continuousZ		|
-│   ├── binaryM-continuousZ-nomal01	| 	← Figure 13
-│   ├── binaryM-continuousZ-nomal10	|
-│   └── trash
-├── sim7-nonlinearTMLE	← Table 6, 7
-│   ├── DGPs
-│   ├── binaryM		
-│   ├── continuousM
-│   └── multiM-d2
+│   ├── DGPs
+│   ├── R
+│   ├── binaryM-binaryZ-interAZ ← Figure S13
+│   ├── binaryM-continuousZ-interAZ ← Figure S14
+│   ├── binaryM-continuousZ-nonverma-estimator-interAZZ ← Figure S14
+│   ├── binaryM-continuousZ-tn-interAZZ ← Figure S14
+│   ├── binaryM-continuousZ-unif-interAZZ ← Figure S14
+└── sim7-nonlinearTMLE ← Table S2, S3
+    ├── DGPs
+    ├── binaryM
+    ├── continuousM
+    └── multiM-d2
 ```
 
 

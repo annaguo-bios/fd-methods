@@ -1,13 +1,13 @@
 args = commandArgs(trailingOnly=T)
-truth.f.name=args[1] # require specifying truth function, e.g. truth.f.name <- "0-truth-binary.R"
-dgp.f.name=args[2] # the dgp.R function, e.g. dgp.f.name <- "0-dgp-binary.R"
+truth.f.name=args[1] # require specifying truth function, e.g. truth.f.name <- "6-truth-binaryM-continuousZ.R"
+dgp.f.name=args[2] # the dgp.R function, e.g. dgp.f.name <- "6-dgp-binaryM-continuousZ-interAZ.R"
 out.name=args[3] # require specifying the name for the output file, e.g. out.name <- "0-truth-binary.Rdata"
 N=as.integer(args[4]) # require specifying the sample size for computing the truth numerically, e.g. N <- 100000
-pz = args[5] # \tilde{p}(Z)
+pz = args[5] # pz='dgp-pz'
 
 
 tilde_pz <- NULL
-n_sample <- 5000
+n_sample <- 500
 
 if (pz=='dgp-pz'){
   
@@ -38,6 +38,15 @@ if (pz=='dgp-pz'){
   tilde_pz <- function(z) {dnorm(z,10,1)}
   
   sample_pz <- rnorm(n_sample,10,1)
+  
+}else if (pz=='mix'){
+  
+  eps <- 0.3  # try 0.01, 0.02, 0.05
+  
+  tilde_pz <- function(z) (1-eps)*dnorm(z,1,1) + eps*dnorm(z,10,1)
+  
+  mix_ind <- rbinom(n_sample, 1, eps)
+  sample_pz <- ifelse(mix_ind==1, rnorm(n_sample,10,1), rnorm(n_sample,1,1))
   
 }
 
@@ -92,16 +101,17 @@ at.ATE <- data.frame(ATE=ATE, VAR.ATE=VAR.ATE)
 rownames(at.ATE) <- c("all.z")
 
 
-print("E[Y1] and it's variance")
-print(at.Y1)
+# print("E[Y1] and it's variance")
+# print(at.Y1)
+# 
+# 
+# print("E[Y0] and it's variance")
+# print(at.Y0)
 
-
-print("E[Y0] and it's variance")
-print(at.Y0)
-
-
+cat('tilde_pz: ', pz, '\n')
 print("ATE and it's variance")
 print(at.ATE)
+cat('\n')
 
 
 save(list = c("E.Y1","E.Y0","ATE","VAR.Y1","VAR.Y0","VAR.ATE","mean.EIF.Y1","mean.EIF.Y0"),file = out.name)

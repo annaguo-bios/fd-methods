@@ -1,4 +1,0 @@
-Rscript organize.R fd_admg1 AIPW 200
-Rscript organize.R fd_admg2 AIPW 200
-Rscript organize.R nonfd_admg1 AIPW 200
-Rscript organize.R nonfd_admg2 AIPW 200

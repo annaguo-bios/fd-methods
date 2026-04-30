@@ -159,18 +159,11 @@ frontdoor_effect_est <- function(a,data,treatment, mediator, outcome, anchor,
       ATE_allz = tmp$ATE
       
       ## the optimized z ##
-      f.var.z <- function(z){ # optimize variance over z=p(Z=1)
-        
-        EIF_ATE_z <- z*EIF_ATE_z1 + (1-z)*EIF_ATE_z0
-        
-        return(mean(EIF_ATE_z^2))
-        
-      }
       
-      z.opt <- optimize(f.var.z, interval = c(0, 1))
+      z.opt <- mean(EIF_ATE_z0*(EIF_ATE_z0-EIF_ATE_z1))/mean((EIF_ATE_z1 - EIF_ATE_z0)^2)
       
-      ATE_opt = z.opt$minimum*ATE_z1 + (1-z.opt$minimum)*ATE_z0
-      EIF_ATE_opt <- z.opt$minimum*EIF_ATE_z1 + (1-z.opt$minimum)*EIF_ATE_z0
+      ATE_opt = z.opt*ATE_z1 + (1-z.opt)*ATE_z0
+      EIF_ATE_opt <- z.opt*EIF_ATE_z1 + (1-z.opt)*EIF_ATE_z0
       lower.ci_opt <- ATE_opt - 1.96*sqrt(mean(EIF_ATE_opt^2)/n)
       upper.ci_opt <- ATE_opt + 1.96*sqrt(mean(EIF_ATE_opt^2)/n)
       
@@ -179,7 +172,7 @@ frontdoor_effect_est <- function(a,data,treatment, mediator, outcome, anchor,
                               upper.ci=upper.ci_opt, # upper bound of 95% CI
                               EIF=EIF_ATE_opt, # EIF
                               var_ATE=mean(EIF_ATE_opt^2)/n, # variance of ATE
-                              z.opt=z.opt$minimum) # optimal z
+                              z.opt=z.opt) # optimal z
       
       names(output)[count] <- paste0(m,'.opt.linear')
       
@@ -197,7 +190,24 @@ frontdoor_effect_est <- function(a,data,treatment, mediator, outcome, anchor,
         
       }
       
-      z.opt.linear3 <- optim(par=c(0.5,0.5), fn=f.var.a.b, method="L-BFGS-B", lower=c(0,0), upper=c(1,1))
+      z.opt.linear3 <- tryCatch(
+        optim(
+          par = c(0.5, 0.5),
+          fn = f.var.a.b,
+          method = "L-BFGS-B",
+          lower = c(0, 0),
+          upper = c(1, 1)
+        ),
+        error = function(e) NULL
+      )
+      
+      if (is.null(z.opt.linear3) || z.opt.linear3$convergence != 0) {
+        z.opt.linear3 <- list(
+          par = c(NA_real_, NA_real_),
+          value = NA_real_,
+          convergence = NA_integer_
+        )
+      }
       
       ATE_opt = z.opt.linear3$par[1]*ATE_allz + z.opt.linear3$par[2]*ATE_z1 + (1-z.opt.linear3$par[1]-z.opt.linear3$par[2])*ATE_z0
       EIF_ATE_opt <- z.opt.linear3$par[1]*EIF_ATE_allz + z.opt.linear3$par[2]*EIF_ATE_z1 + (1-z.opt.linear3$par[1]-z.opt.linear3$par[2])*EIF_ATE_z0

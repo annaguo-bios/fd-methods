@@ -2,11 +2,30 @@
 ## For the binary mediator, binaryZ
 Rscript compute_truth.R 6-truth-binaryM-binaryZ.R 6-dgp-binaryM-binaryZ.R 6-truth-binaryM-binaryZ.Rdata 100000
 Rscript compute_truth.R 6-truth-binaryM-binaryZ.R 6-dgp-binaryM-binaryZ-dgp2.R 6-truth-binaryM-binaryZ-dgp2.Rdata 100000
+Rscript compute_truth.R 6-truth-binaryM-binaryZ.R 6-dgp-binaryM-binaryZ-interAZ.R 6-truth-binaryM-binaryZ-interAZ.Rdata 100000
+Rscript compute_truth.R 6-truth-binaryM-binaryZ.R 6-dgp-binaryM-binaryZ-interAZ-IV.R 6-truth-binaryM-binaryZ-interAZ-IV.Rdata 100000
+Rscript compute_truth.R 6-truth-binaryM-binaryZ.R 6-dgp-binaryM-binaryZ-IV.R 6-truth-binaryM-binaryZ-IV.Rdata 100000
 
 ## For the binary mediator, continuousZ
 Rscript compute_truth_continuousZ.R 6-truth-binaryM-continuousZ.R 6-dgp-binaryM-continuousZ.R 6-truth-binaryM-continuousZ-pz.Rdata 100000 dgp-pz
-Rscript compute_truth_continuousZ.R 6-truth-binaryM-continuousZ.R 6-dgp-binaryM-continuousZ.R 6-truth-binaryM-continuousZ-uniform1-pz.Rdata 100000 uniform1-pz
-Rscript compute_truth_continuousZ.R 6-truth-binaryM-continuousZ.R 6-dgp-binaryM-continuousZ.R 6-truth-binaryM-continuousZ-uniform100-pz.Rdata 100000 uniform100-pz
+Rscript compute_truth_continuousZ.R 6-truth-binaryM-continuousZ.R 6-dgp-binaryM-continuousZ.R 6-truth-binaryM-continuousZ-mix.Rdata 100000 mix
 Rscript compute_truth_continuousZ.R 6-truth-binaryM-continuousZ.R 6-dgp-binaryM-continuousZ.R 6-truth-binaryM-continuousZ-normal01-pz.Rdata 100000 normal01-pz
 Rscript compute_truth_continuousZ.R 6-truth-binaryM-continuousZ.R 6-dgp-binaryM-continuousZ.R 6-truth-binaryM-continuousZ-normal10.1-pz.Rdata 100000 normal10.1-pz
-Rscript compute_truth_continuousZ.R 6-truth-binaryM-continuousZ.R 6-dgp-binaryM-continuousZ.R 6-truth-binaryM-continuousZ-normal5.1-pz.Rdata 100000 normal5.1-pz
+Rscript compute_truth_continuousZ-nonverma.R 6-truth-binaryM-continuousZ-nonverma.R 6-dgp-binaryM-continuousZ.R 6-truth-binaryM-continuousZ-nonverma.Rdata 100000
+
+
+Rscript compute_truth_continuousZ.R 6-truth-binaryM-continuousZ.R 6-dgp-binaryM-continuousZ-interAZ.R 6-truth-binaryM-continuousZ-pz-interAZ.Rdata 1000000 dgp-pz
+Rscript compute_truth_continuousZ.R 6-truth-binaryM-continuousZ.R 6-dgp-binaryM-continuousZ-interAZ.R 6-truth-binaryM-continuousZ-normal01-pz-interAZ.Rdata 1000000 normal01-pz
+Rscript compute_truth_continuousZ.R 6-truth-binaryM-continuousZ.R 6-dgp-binaryM-continuousZ-interAZ.R 6-truth-binaryM-continuousZ-normal10.1-pz-interAZ.Rdata 1000000 normal10.1-pz
+Rscript compute_truth_continuousZ-nonverma.R 6-truth-binaryM-continuousZ-nonverma.R 6-dgp-binaryM-continuousZ-interAZ.R 6-truth-binaryM-continuousZ-nonverma-interAZ.Rdata 1000000
+
+
+
+
+
+## For the binary mediator, continuousZ, IV, where M is indep of Z given parents
+Rscript compute_truth_continuousZ.R 6-truth-binaryM-continuousZ.R 6-dgp-binaryM-continuousZ-IV.R 6-truth-binaryM-continuousZ-pz-IV.Rdata 100000 dgp-pz
+Rscript compute_truth_continuousZ.R 6-truth-binaryM-continuousZ.R 6-dgp-binaryM-continuousZ-IV.R 6-truth-binaryM-continuousZ-normal01-pz-IV.Rdata 100000 normal01-pz
+Rscript compute_truth_continuousZ.R 6-truth-binaryM-continuousZ.R 6-dgp-binaryM-continuousZ-IV.R 6-truth-binaryM-continuousZ-normal10.1-pz-IV.Rdata 100000 normal10.1-pz
+Rscript compute_truth_continuousZ-nonverma.R 6-truth-binaryM-continuousZ-nonverma.R 6-dgp-binaryM-continuousZ-IV.R 6-truth-binaryM-continuousZ-nonverma-IV.Rdata 100000
+

@@ -1,3 +1,8 @@
+*.pdf
+*.gz
+*.out
+*.aux
+*.log
 .Rproj.user
 .Rhistory
 .RData
@@ -18,3 +23,5 @@ Simulations/Simulations.Rproj
 Simulations/Simulations.Rproj
 Simulations/Simulations.Rproj
 Simulations/.gitignore
+**/*trash*/
+**/*test*/
